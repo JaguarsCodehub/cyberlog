@@ -1,0 +1,7 @@
+Features:
+- Users should also be able to check domains
+- OAuth for users
+- No need of Magic Link
+- Users should only login with their company email
+- Dropdown for Logout
+- Process Data
