@@ -2,10 +2,17 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-
-import { MenuIcon, UsersIcon, SettingsIcon, Plus, Link2 } from 'lucide-react';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Link2, LogOut, MenuIcon, SettingsIcon, UsersIcon } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const links = [
     {
@@ -35,6 +42,13 @@ export default function AdminLayout({
     userName: any;
 }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const router = useRouter();
+
+    const handleSignOut = async () => {
+        await signOut({ redirect: false });
+        router.push('/');
+    };
+
     return (
         <div className="flex h-screen ">
             <aside
@@ -72,13 +86,22 @@ export default function AdminLayout({
                         <MenuIcon className="h-6 w-6" />
                     </Button>
                     <div className="ml-auto flex items-center space-x-4">
-                        <Button variant="ghost" size="icon">
-                            {/* <UserIcon className="h-5 w-5" /> */}
-                            <Avatar className="size-8">
-                                <AvatarImage src={userAvatar} alt={userName} />
-                                <AvatarFallback>{userName?.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                        </Button>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" size="icon">
+                                    <Avatar className="size-8">
+                                        <AvatarImage src={userAvatar} alt={userName} />
+                                        <AvatarFallback>{userName?.charAt(0)}</AvatarFallback>
+                                    </Avatar>
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                                <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
+                                    <LogOut className="mr-2 h-4 w-4" />
+                                    <span>Log out</span>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
                     </div>
                 </header>
 

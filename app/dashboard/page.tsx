@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import ApiInput from './ApiInput';
 import verifyKeyAction from '@/actions/verifyKeyAction';
@@ -8,6 +9,7 @@ import toast from 'react-hot-toast';
 import { ApiKey } from '@prisma/client';
 
 export default function Component() {
+    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const [apiDetails, setApiDetails] = useState<ApiKey | null>(null)
     const [copied, setCopied] = useState(false);
@@ -21,7 +23,11 @@ export default function Component() {
 
         const response = await verifyKeyAction(key?.trim());
 
-        if (!response.ok) toast.error(response.message);
+        if (!response.ok) {
+            toast.error(response.message);
+        } else {
+            router.push('/dashboard/domain');
+        }
 
         setIsLoading(false);
     };

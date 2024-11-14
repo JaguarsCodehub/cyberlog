@@ -1,5 +1,5 @@
 import { signOut } from "@/auth";
-import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -9,13 +9,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import SubmitBtn from "@/components/ui/submit-btn";
-import { LogOut, Loader2 } from "lucide-react";
+import { LogOut } from "lucide-react";
 
 export default function Page() {
   const logoutAction = async () => {
     "use server";
 
     await signOut();
+    redirect('/');
   };
 
   return (
