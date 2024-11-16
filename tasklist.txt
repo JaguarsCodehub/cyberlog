@@ -1,10 +1,9 @@
-Features:
+Tasks as of last meeting:
 - Users should also be able to check domains Done🟢
 - OAuth for users Done🟢
 - No need of Magic Link Done🟢
+- Keys should be longer Done🟢
 - Dropdown for Logout Done🟢
 - Process Data Done🟢
-
-
 
 - Users should only login with their company email
