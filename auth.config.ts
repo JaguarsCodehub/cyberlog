@@ -31,6 +31,11 @@ export const authConfig = {
     error: '/access-denied',
     verifyRequest: '/verify',
   },
+  session: {
+    strategy: "jwt",
+    maxAge: 24 * 60 * 60, // 24 hours in seconds
+    updateAge: 60 * 60, // 1 hour in seconds
+  },
   callbacks: {
     authorized({ auth }) {
       const isAuthenticated = !!auth?.user;

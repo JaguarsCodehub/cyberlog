@@ -55,6 +55,7 @@ export default function Home() {
         <div className='my-4'>Loading...</div>
       ) : (
         <>
+          <DomainList domains={currentDomains} />
           <div className='flex justify-center items-center my-4'>
             <button
               onClick={() => handlePageChange(currentPage - 1)}
@@ -111,7 +112,6 @@ export default function Home() {
               Next
             </button>
           </div>
-          <DomainList domains={currentDomains} />
         </>
       )}
     </main>
